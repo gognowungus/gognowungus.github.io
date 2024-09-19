@@ -8,13 +8,15 @@
 
   
     <p id="dillogametext">Dillo Dillo Clicker</p>
-    <button onclick="changedillo(-200) " class="button button1">cost: 200 </button>
+    <button id = "upgrade_0" onclick="buyUpgrade(0)" class="button button1">
+      
+      egg <br> dpc + 1<br> cost: <p>10</p>   </button>
 
     <h1 id = "dillocount">     </h1>
    
     <div id="dilloholder">
         
-        <img id="dilloimage" src="https://images.vexels.com/content/210166/preview/armadillo-animal-hand-drawn-4ec64e.png" onclick="changedillo(1)">    
+        <img id="dilloimage" src="https://images.vexels.com/content/210166/preview/armadillo-animal-hand-drawn-4ec64e.png" onclick="dilloclick()">    
     </div>
 
     
@@ -27,12 +29,16 @@
 
 @font-face {
     font-family: 'derpfont'; /*a name to be used later*/
-    src: url('../DilloDilloGame/fonts/Testfont-Regular.ttf'); /*URL to font*/
+    src: url('/fonts/Testfont-Regular.ttf'); /*URL to font*/
 }
 
 p
 {
 font-family: 'derpfont';
+}
+
+body{
+  background-image: url("image.png");
 }
 
 .button {
@@ -95,12 +101,104 @@ display: flex;
 </style>
 <script>
  var dillos = 0;
+ var dpc = 1;
+ var dps = 0
  function changedillo(ammount){
     dillos += ammount 
     document.getElementById("dillocount").textContent = "dillos: "  + dillos;
+
+
     
 
- }   
+ }
+ 
+ function dilloclick() {
+  changedillo(dpc)
+ }
+
+
+ function spindillo(spendcost){
+if(dillos >= spendcost){
+  changedillo(-spendcost)
+  return true
+
+}
+return false
+
+ }
+
+
+ var purchaseupgrades = [
+0,
+0,
+0,
+0,
+0,
+0,
+0,
+0,
+0,
+0,
+
+0,
+0,
+0,
+0,
+0,
+0,
+0,
+
+
+ ]
+
+
+
+ var upgrades = [
+  {
+    name: "egg", 
+    cost: 10,
+    description: "adds 1 dillo per click",
+    costinsrease: 1.1,
+    dpc: 1,
+    dps: 0
+
+  }
+
+  
+ ]
+
+ function buyUpgrade(upgradeid){
+var upgrade = upgrades[ upgradeid]
+var cost = upgrade.cost
+if(purchaseupgrades[upgradeid ] > 0 ){
+  cost *= upgrade.costinsrease * purchaseupgrades [upgradeid]
+}
+var cancontinue = spindillo(cost)
+if(cancontinue == false){
+  return 
+}
+
+dpc += upgrade.dpc
+dps += upgrade.dps
+purchaseupgrades[upgradeid]++
+
+updatebutton(upgradeid)
+
+}
+
+function updatebutton(upgradeid){
+  var upgrade = upgrades[ upgradeid]
+var button = document.getElementById("upgrade_" + upgradeid)
+console.log (button)
+var cost = upgrade.cost
+if(purchaseupgrades[upgradeid ] > 0 ){
+  cost *= upgrade.costinsrease * purchaseupgrades [upgradeid]
+}
+
+button.childNodes[2].innerText = cost
+
+}
+
 
 
  
