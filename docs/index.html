@@ -10,7 +10,18 @@
     <p id="dillogametext">Dillo Dillo Clicker</p>
     <button id = "upgrade_0" onclick="buyUpgrade(0)" class="button button1">
       
+    
+      
       egg <br> dpc + 1<br> cost: <p>10</p>   </button>
+
+
+
+
+      <button id = "upgrade_1" onclick="buyUpgrade(1)" class="button button1">
+      
+    
+      
+        ladybug feeders <br> dps + 2<br> cost: <p>50</p>   </button>
 
     <h1 id = "dillocount">     </h1>
    
@@ -162,7 +173,23 @@ return false
     dpc: 1,
     dps: 0
 
+
+
+
+    
   }
+
+,
+  {
+    name: "ladybug feeders", 
+    cost: 50,
+    description: "adds 2 dillos per second",
+    costinsrease: 1.3,
+    dpc: 0,
+    dps: 2
+
+  }
+
 
   
  ]
@@ -198,6 +225,26 @@ if(purchaseupgrades[upgradeid ] > 0 ){
 button.childNodes[2].innerText = cost
 
 }
+setInterval(adps,1000)
+ function adps(){
+
+
+  changedillo(dps)
+ }
+
+ function updatebutton(){
+for(let i=0; i<upgrades.length; i++){
+
+
+
+let button = document.getElementById("button_" + i);
+
+}
+
+
+
+
+ }
 
 
 
